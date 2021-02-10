@@ -1,0 +1,1111 @@
+#+TITLE: Einführungsveranstaltung Informatik
+#+LANGUAGE: de
+#+SETUPFILE: setup/theme-readtheorg-local.setup
+#+options: ^:nil
+
+
+* Was ist gerade los in der Informatik?
+
+- IoT, "Industrie 4.0", 5G 
+- AIoT "Artificial Intelligence for IoT"
+- Machine Learning, Neuronale Netze, selbstfahrende Autos
+- AR + VR Pokémon Go, Occulus Go, Rift, Quest, 3D-Weltkarten ... 
+- Online-Veranstaltungen, Homeschooling, VR-Veranstaltungen 
+- Clouds: GaiaX, AWS, Azure, Google ... 
+- Webframeworks (Vue, Angular, Xamarin, React, Ionic, Flutter ...) 
+- Container (Docker, Kubernetes ...) 
+- Big Data 
+- Blockchain, Krypto-Currency 
+- Robotrading 
+- 3D-Druck? 
+- 
+
+* Mindmap 
+
+
+ #+BEGIN_SRC latex :packages '(("" "tikz")) :results output raw :file img/mindmap.png :imagemagick yes :fit yes :imoutoptions -geometry 1200 :iminoptions  -density 600 :eval no
+  \usetikzlibrary{mindmap,trees}
+  \begin{tikzpicture}
+    \path[mindmap,concept color=black,text=white]
+      node[concept] {Informatik}
+      [clockwise from=0]
+      child[concept color=green!50!black] {
+	node[concept] {praktische}
+	[clockwise from=90]
+	child { node[concept] {Algo\-rithmen} }
+	child { node[concept] {Daten\-struk\-turen} }
+	child { node[concept] {Pro\-gram\-mier-Spra\-chen}	 
+	  [clockwise from=30]
+	  child[concept] { node[concept] {prozedurale} }
+	  child[concept] { node[concept] {objektorientierte} }
+	  child[concept] { node[concept] {funktionale} }
+	  child[concept] { node[concept] {multi\-paradig\-matisch} }
+	}
+	child { node[concept] {Software Engineer\-ing} }
+      }  
+      child[concept color=blue] {
+	node[concept] {angewandte}
+	[clockwise from=-30]
+	child { node[concept] {Daten\-banken} }
+	child { node[concept] {Weban\-wendungen} }
+	child { node[concept] {Apps} }
+      }
+      child[concept color=red] { 
+	node[concept] {technische}
+      }
+      child[concept color=orange] { 
+	node[concept] {theoretische} 
+      }
+      child[concept color=grey!40] { 
+	node[concept] {Mathematik} 
+	[clockwise from=200]
+	child[concept] { node[concept] {Algebra} }
+	child[concept] { node[concept] {Analysis} }
+	child[concept] { node[concept] {Statistik} }
+	child[concept] { node[concept] {Numerik} }
+      }
+      child[concept color=magenta] {
+        node[concept] {Wissens\-gebiete}
+      };
+  \end{tikzpicture}
+
+#+END_SRC
+
+#+RESULTS:
+[[file:img/mindmap.png]]
+
+
+"Wissensgebiete" meint alle Fachrichtungen, auf die wir Informatik anwenden bzw. die wir auf die Informatik anwenden können:
+- Naturwissenschaften (Mathematik, Biologie, Chemie, Physik)
+- Medizin 
+- Ökonomie
+- Architektur
+- Psychologie
+- Soziologie
+- Recht
+- Verwaltung 
+- Archäologie
+- Kriminalistik 
+- Landwirtschaft 
+- Luft- und Raumfahrt
+- Industrie 4.0  
+- ... 
+
+  Bedeutet auch immer Bewusstmachen der Gefahren & Risiken (Bspw. Facebook, Twitter, China, KI, etc.), aber auch Chancen
+
+  Informatik als "Hilfswissenschaft" oder eher als "universelle" Wissenschaft? 
+
+"Theoretische Informatik" befasst sich mit Themen wie
+- welche Aufgaben sind überhaupt "berechenbar"?
+- wie komplex ist eine Aufgabe? 
+  - steigt die Laufzeit in Abhängigkeit der Problemgröße linear, logarithmisch, quadratisch, exponentiell etc.? 
+  - z.B. Sortierung von /n/ Werten: $n \cdot \log(n)$ 
+
+* Geschichte von UNIX
+
+** Anfänge des "Computerzeitalters"
+
+#+BEGIN_QUOTE
+/[Y]ou . . . fellows ought to go back and change your program entirely, stop this . . . foolishness with Eckert and Mauchly.’’ That was the opinion of Howard Aiken, Harvard mathematician and builder of the Mark I calculator, expressed to (...) the U.S. National Bureau of Standards in 1948. (...)  In Aiken’s view, a commercial market would never develop; in the United States there was a need for perhaps for five or six such machines, but no more./
+#+END_QUOTE
+
+#+CAPTION: "Menschliche Computer" (North American Aviation, frühe 1950er Jahre)
+[[file:img/humancomputers.png]]
+
+#+CAPTION: Dieselbe Institution 10 Jahre später: "Menschliche Computer" ersetzt durch IBM 7090 (ca. 1962)
+file:img/ibm7090.png
+
+
+#+CAPTION: A History of Modern Computing
+file:img/historyofmoderncomputing.png
+** Das Massachusetts Institute of Technology (MIT) ab '59
+
+
+- [[https://de.wikipedia.org/wiki/John_McCarthy][John McCarthy]]
+- [[https://de.wikipedia.org/wiki/Marvin_Minsky][Marvin Minsky]]
+- [[https://de.wikipedia.org/wiki/Joseph_Weizenbaum][Joseph Weizenbaum]]
+
+#+CAPTION: John McCarthy; KI-Pionier, Erfinder der Programmiersprache LISP
+[[file:img/mccarthy.jpg]]
+
+
+#+BEGIN_QUOTE
+/The IBM 704 cost several million dollars, took up an entire room, needed constant attention from a cadre of professional machine operators, and required special air conditioning so that the glowing vacuum tubes inside it would not heat up to data-destroying temperatures. When the air conditioning broke down — a fairly common occurrence—a loud gong would sound, and three engineers would spring from a nearby office to frantically take covers off the machine so its innards wouldn’t melt. All these people in charge of punching cards, feeding them into readers, and pressing buttons and switches on the machine were what was commonly called a Priesthood, and those privileged enough to submit data to those most holy priests were the official acolytes. It was an almost ritualistic exchange./
+#+END_QUOTE
+
+*** TX-0 und die Hacker-Kultur
+
+1959 stellten die [[https://en.wikipedia.org/wiki/MIT_Lincoln_Laboratory][Lincoln Labs]] den Studenten am MIT ihren experimentellen Prototyp  [[https://de.wikipedia.org/wiki/TX-0][TX-0]] für unbegrenzte Zeit zur Verfügung
+- "Abfallprodukt" des Militärprojekts [[https://de.wikipedia.org/wiki/Semi-Automatic_Ground_Environment][SAGE]]
+- einer der ersten Computer auf Transistorbasis
+- siehe auch Ivan Sutherland's "Sketchpad"-Demo auf [[https://www.youtube.com/watch?v=3wrn9cxlgls][Youtube]]
+
+#+CAPTION: TX-0
+[[file:img/tx-zero.JPG]]
+
+#+BEGIN_QUOTE
+/All you had to do was look at someone in the IBM world and note the button-down white shirt, the neatly pinned black tie, the hair carefully held in place, and the tray of punch cards in hand. You could  wander into the Computation Center, where the 704, the 709, and later the 7090 were stored—the best IBM had to offer — and see the stifling orderliness, down to the roped-off areas beyond which unauthorized people could not venture. And you could compare that to the extremely informal atmosphere around the TX-0, where grungy clothes were the norm and almost anyone could wander in./
+#+END_QUOTE
+
+Um die TX-0 bildete sich rasch eine sehr "nerdige"  [[https://en.wikipedia.org/wiki/Hacker_culture][Hacker Culture]] von "Freaks", die mit dem Rechner "aus Spaß" experimentieren wollten (z. B. Computermusik)
+
+Vergleiche hierzu auch Bill Gates [[https://de.wikipedia.org/wiki/Open_Letter_to_Hobbyists][Open Letter to Hobbyists]]
+
+
+*** Digital Equipment Corporation's PDP-1
+
+#+BEGIN_QUOTE
+/In the summer of 1961, (...) a new company was soon to deliver to MIT, absolutely free, the next step in computing, a machine that took the interactive principles of the TX-0 several steps further. A machine that might be even better for hackers than the TX-0 was. The [[https://de.wikipedia.org/wiki/PDP-1][PDP-1]]. It would change computing forever. It would make the still hazy hacker dream come a little closer to reality./
+#+END_QUOTE
+
+- erstes interaktives Computerspiel [[https://de.wikipedia.org/wiki/Spacewar!][Spacewar!]]
+
+#+CAPTION: Steve "Slug" Russel vor einer Dec PDP-1 (ca. 2005)
+[[file:img/SteveRussell.png]]
+
+
+*** Vergleich: Dec PDP-1 vs. Raspberry Pi 3 
+
+#+ATTR_HTML: :width 500px
+#+CAPTION: DEC PDP-1 (Computer History Museum Mountain View, California)
+[[file:img/decpdp1.jpg]]
+
+#+ATTR_HTML: :width 500px
+#+CAPTION: Raspberry Pi Model 3
+[[file:img/RASP_03_01.png]]
+
+|               | PDP-1 {[[http://www.computerhistory.org/pdp-1/specifications/][1]]} (1960)               | Raspberry Pi 3 {[[https://www.raspberrypi.org/magpi/raspberry-pi-3-specs-benchmarks/][2]], [[https://www.pololu.com/blog/598/new-product-raspberry-pi-3-model-b][3]], [[https://www.amazon.com/Raspberry-Pi-RASPBERRYPI3-MODB-1GB-Model-Motherboard/dp/B01CD5VC92][4]], [[https://www.theverge.com/circuitbreaker/2017/3/17/14962170/raspberry-pi-sales-12-5-million-five-years-beats-commodore-64][5]]} (2017)  | Faktor                 |
+|---------------+-----------------------------------+--------------------------------------+------------------------|
+| Hauptspeicher | ca. 36-148 KByte                  | 1 GByte                              | 29000 \times so groß   |
+|               | (4000-16000 18 Bit große "Worte") |                                      |                        |
+| Prozessortakt | 200 kHz                           | 1,2 GHz (4 Kerne)                    | 6000 \times schneller (pro Kern) |
+| Gewicht       | 544 Kg                            | 42 g                                 | 13000 \times leichter |
+| Größe         | 2,43 m \times 0,6 m \times 1,82 m | 8,5 cm \times 5,59 cm \times 2,03 cm | 27500 \times kleiner   |
+| Preis         | $ 120000                          | $ 37,95                              | 26000 \times günstiger |
+|               | ($ 985436 inflationsbereinigt)    |                                      |                        |
+| Stückzahl     | 50                                | 12, 5 Mio.                           | 252000 \times so viele |
+|               |                                   | (März 2017; inkl. Vorgängermodelle)  |                        |
+
+[[https://github.com/MiSTer-devel/PDP1_MiSTer][Implementierung einer PDP-1 mit einem FPGA]]
+
+*** Time Sharing
+
+1966 sollte die Fakultäts-PDP-6 ein Time Sharing-Betriebssystem erhalten, um mehreren Benutzern einen gleichzeitigen Zugang zur Hardware zu ermöglichen
+
+- [[https://de.wikipedia.org/wiki/Compatible_Time-Sharing_System][CTSS]] (Compatible Time Sharing System)
+- [[https://de.wikipedia.org/wiki/Multics][Multics]] (zusammen mit GE und Honeywell, später auch AT&T bzw. Bell Labs)
+
+#+BEGIN_QUOTE
+/But the worst thing about Multics was the heavy security and the system of charging the user for the time. Multics took the attitude that the user paid down to the last nickel; it charged some for the memory you used, some more for the disk space, more for the time. Meanwhile the Multics planners, in the hacker view, were making proclamations about how this was the only way that utilities could work. The system totally turned the Hacker Ethic around—instead of encouraging more time on the computer (the only good thing about time sharing as far as most hackers were concerned), it urged you to spend less time—and to use less of the computer’s facilities once you were on! The Multics philosophy was a disaster./
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+The hackers plagued the Multics system with tricks and crashes. It was almost a duty to do it. As Minsky would later say, "There were people doing projects that some other people didn’t like and they would play all sorts of jokes on them so that it was impossible to work with them ... I think [the hackers] helped progress by undermining professors with stupid plans."
+#+END_QUOTE
+#+CAPTION: Hackers
+[[file:img/hackers.jpg]]
+
+** Bell Labs und UNIX
+
+AT&T (US-amerik. Telekom-Monopolist) leistete sich zu der Zeit ein gigantisches Forschungsinstitut, die legendären [[https://de.wikipedia.org/wiki/Bell_Laboratories][Bell Labs]].
+
+Die Bell Labs haben signifikant die Art geprägt, wie wir heute kommunizieren
+
+Bahnbrechende Erfindungen der Bell Labs von 1947-69:
+- [[https://www.bell-labs.com/about/recognition/1956-transistor/][Transistor]]
+- Videotelefonie
+- [[https://www.bell-labs.com/about/history-bell-labs/stories-changed-world/inventing-laser/][Laser]]
+- CCD Sensoren (Digitalkameras)
+- Kommunikationssatelliten
+- Zelluläre Netzwerke (Handys)
+- Entdeckung der [[https://www.nbcnews.com/science/space/bell-labs-celebrates-big-bang-discovery-50th-anniversary-bash-n110121][kosmischen Hintergrundstrahlung]]
+- u.v.a.m.
+
+#+CAPTION: [[https://de.wikipedia.org/wiki/Claude_Shannon][Claude Shannon]], Begründer der Informationstheorie
+[[file:img/claudeshannoncentenary4.jpg]]
+
+#+BEGIN_QUOTE
+/Bell Laboratories found the GE time-sharing system wanting, and dropped out of the MULTICS project in 1969. Two researchers there, Ken Thompson and Dennis Ritchie, ended up developing UNIX, in part because they needed an environment in which to do their work after their employer removed the GE system. They began work on what eventually became UNIX on a Digital Equipment Corporation PDP-7, a computer with far less capability than the GE mainframe and already obsolete in 1969. They later moved to a PDP-11. For the next decade and a half, UNIX’s development would be associated with DEC computers. The name implies that "UNIX" is a simplified form of "MULTICS", and it did borrow some of MULTICS’s features. UNIX was also inspired by the earlier, and simpler, CTSS as well./
+#+END_QUOTE
+
+#+CAPTION: Ken Thompson und Dennis Ritchie
+[[file:img/Ken_n_dennis.jpg]]
+
+Aufgrund von Kartellrechten durfte AT&T nicht in das Computerbusiness einsteigen
+- das kommerzielle Interesse war also (zunächst) gering
+- UNIX wurde für wenige $100 an Universitäten lizensiert
+- auch sonst tauchten Kopien auf (Gutmütigkeit von Ken & Dennis? Hacker-Ethik?)
+
+Eines der ersten universitären UNIXe (1974) ist das [[https://de.wikipedia.org/wiki/Berkeley_Software_Distribution][BSD UNIX]] (Berkeley Software Distribution)
+- Kern von macOS
+
+In den frühen 80ern einigte sich AT&T mit der US Regierung (bzw. wurden zerschlagen) und durften nun in das Computer-Business einsteigen.
+- Beginn der kommerziellen Vermarktung von UNIX als [[https://en.wikipedia.org/wiki/UNIX_System_V][System V]] durch AT&T
+
+#+BEGIN_QUOTE
+/UNIX spread because AT&T gave it away; Berkeley UNIX generated enormous profits for SUN and other workstation vendors but not for AT&T. When AT&T was allowed to market computer products (...), it failed to set a standard for, or profit from, its creation. (...); other companies introduced incompatible versions for little more reason than to be different from AT&T, a competitor./
+#+END_QUOTE
+
+Führte zum [[https://en.wikipedia.org/wiki/UNIX_wars][UNIX War]]
+
+** Linux
+
+[[https://stallman.org/][Richard Stallman]], "der letzte Hacker" 
+
+#+CAPTION: Richard Stallman, Gründer der *GNU Software Foundation* (GNU: Gnu is not UNIX)
+file:img/stallman.jpg
+
+- Gründete 1984 die [[https://de.wikipedia.org/wiki/GNU-Projekt][GNU Software Foundation]]
+
+Aus [[https://de.wikipedia.org/wiki/Geschichte_von_Linux][Wikipedia]]:
+
+#+BEGIN_QUOTE
+Ein anderes Projekt rund um ein Betriebssystem aus freier Software war in den 1980er Jahren auch die Berkeley Software Distribution, kurz BSD. Diese hatte sich aus Eigenentwicklungen der Universität Berkeley aus den UNIX-Versionen der 4er-Edition und folgender von AT&T entwickelt. Da aber in den BSD-Versionen noch immer Code von AT&Ts UNIX enthalten war, kam es Anfang der 1990er Jahre zu einem Rechtsstreit zwischen AT&T und der Universität Berkeley, der die Entwicklung von BSD stark einschränkte und einige Jahre stark verlangsamte.
+
+Anfang der 1990er gab es also kein vollständiges, freies Betriebssystem.
+#+END_QUOTE
+
+
+Linus Torvalds begann 1991  auf Basis von "Minix" (Mini-Betriebssystem aus dem Buch [[https://www.pearsonhighered.com/program/Tanenbaum-Modern-Operating-Systems-4th-Edition/PGM80736.html][Operating Systems]]  von Andrew Tanenbaum) die Entwicklung von Linux
+
+#+CAPTION: Linux-Maskottchen "Tux"
+[[file:img/tux.png]]
+
+[[https://de.wikipedia.org/wiki/GNU/Linux-Namensstreit][Streit mit Stallman]]
+
+[[https://de.wikipedia.org/wiki/Geschichte_von_Linux#Andrew_Tanenbaum][Streit mit Tanenbaum]]
+
+Sabotageversuch durch Microsoft: [[https://de.wikipedia.org/wiki/Geschichte_von_Linux#Konkurrent_Microsoft][Halloween-Dokument]]
+
+
+** UNIX in den späten 90ern und frühen 2000ern
+
+Im der Forschung, an Universitäten und bei Programmierern war UNIX immer außerordentlich beliebt
+
+Viele Hersteller professioneller "Workstations"  (z.B.  Sun, HP, Apollo, Silicon Graphics usw.) boten "eigenes" Unix an
+
+#+CAPTION: [[https://www.youtube.com/watch?v=Bo3lUw9GUJA][SGI Onyx Graphics]] "Supercomputer", 1993 ($ 250 000) 
+[[file:img/onyx.jpeg]]
+
+Diverse Entwicklungen führten jedoch dazu, dass UNIX etwas den Anschluss verpasste
+
+- Rechtsstreitigkeiten 
+- Marktfragmentierung
+- Günstige PC-Architektur war zu schwach für UNIX
+  - UNIX war IBM zudem zu teuer (ca. $ 500 pro Installation)
+  - Microsoft's MS/DOS löste beide Probleme
+    - MS/DOS wurde im Business-Bereich sehr beliebt (Günstig! Tabellenkalkulation!) 
+- später dann machte der Erfolg der X86-Architektur von Intel und Consumer-Grafikkarten (z.B. "Voodoo")  den Herstellern von Workstations stark zu schaffen
+- Erfolg von Microsoft "Windows" im Home- und Office-Bereich
+  - viele Unternehmen und Nutzer griffen  zur "Ware von der Stange" 
+- Win NT drang in den professionellen Markt vor 
+- Platzen der .com-Blase
+  - Pleite diverser Unternehmen (Sun, Silicon Graphics)
+
+[[https://en.wikipedia.org/wiki/History_of_UNIX#1990s][Wikipedia]]:
+
+#+BEGIN_QUOTE
+The bursting of the dot-com bubble (2001–03) led to significant consolidation of versions of UNIX. Of the many commercial variants of UNIX that were born in the 1980s,
+ only Solaris, HP-UX, and AIX were still doing relatively well in the market, though SGI's IRIX persisted for quite some time. 
+Of these, Solaris had the largest market share in 2005.
+#+END_QUOTE
+
+Steve Jobs, Wired-Interview 1995:
+
+#+BEGIN_QUOTE
+Windows has won. It beat the Mac, unfortunately, it beat UNIX, it beat OS/2. An inferior product won
+#+END_QUOTE
+
+** UNIX bzw. Linux heute
+
+- Debian
+- Ubuntu
+- Xubuntu
+- Mint
+- Kali 
+- Fedora
+- SuSe
+- CentOs
+- Red Hat
+- Justin Bieber Linux
+- busybox 
+- Raspberry Pi: Raspian, DietPi, OpenElec (Kodi), RetroPie etc. 
+- u. v. a. m. ...
+
+Wo wird Linux überall genutzt? 
+
+- Linux auf "Supercomputern" (500 von 500) ([[https://www.top500.org/statistics/details/osfam/1][Top 500]], [[https://www.top500.org/statistics/overtime/][Graph]])
+- UNIX als Kern von macOS und iOS
+- Linux als Kern von Android
+- Linux auf Desktops  (Verbreitung \leq 1%)
+  - wobei es nicht das Ziel von Linux ist, "die Mehrheit" der Nutzer anzusprechen
+- UNIX/Linux auf vieler Unterhaltungselektronik
+  - WLAN Router, Satelliten-Receiver  usw. (oft [[https://busybox.net/about.html][busybox]])
+- Linux auf vielen Geräten des "Internet of Things"
+  - Raspberry PI: Kodi, RetroPi, Domoticz, ...
+  - IP Kameras (z. B. [[https://kb.netgear.com/2649/NETGEAR-Open-Source-Code-for-Programmers-GPL?cid=wmt_netgear_organic][Netgear Arlo]] Source Code) 
+  - Sound-Streaming-Boxen (z. B. [[http://www.sonos.com/documents/gpl/7.1/gpl.html][Sonos]] Source Code)
+  - Amazon Echo ([[https://www.amazon.com/gp/help/customer/display.html?nodeId=201626480][Source)]]
+  - Staubsauger ([[https://media.ccc.de/v/34c3-9147-unleash_your_smart-home_devices_vacuum_cleaning_robot_hacking][Hack]])
+  - Thermomix
+  - ... 
+- Linux (bzw. Apache) auf [[http://news.netcraft.com/archives/2015/04/20/april-2015-web-server-survey.html][den meisten Webservern]] im Einsatz (selbst in Microsoft's Cloud [[https://www.zdnet.com/article/linux-now-dominates-azure/][Azure]])
+- Trend zu "Webanwendungen" (Facebook & Co), für die Linux eine geeignete Infrastruktur mit wenigen Befehlen zur Verfügung stellt:
+  - =sudo apt-get install apache2 php5 ...=
+- Big Data, Machine Learning ([[http://hadoop.apache.org/][Hadoop]])
+- Microsoft: [[https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux][Linux Subsystem]]
+
+
+* Python 
+
+** Warum Python? 
+
+Python befindet sich im [[https://www.tiobe.com/tiobe-index/][Tiobe Index]] der verbreitesten Programmiersprachen recht weit oben (zuletzt *weit* vor C#!). 
+
+Aufgaben lassen sich im Vergleich zu anderen Sprachen wie C++, Java, C# etc. mit deutlich weniger [[https://en.wikipedia.org/wiki/Boilerplate_code][Boilerplate Code]] lösen! 
+
+Python eignet sehr gut sich für [[http://amjith.blogspot.com/2011/09/rapid-prototyping-in-python.html][Rapid Prototyping]], Beispiel "Katzenklappe" (müssen das Skript nicht im Detail verstehen!): 
+
+#+BEGIN_SRC python 
+import time
+import RPi.GPIO as GPIO
+from picamera import PiCamera
+import os
+import datetime
+import dropbox 
+import atexit
+
+def exit_handler():
+    global camera
+    camera.stop_preview()
+
+def magnet_callback(channel): 
+    global recording
+    global camera
+    global db 
+    if recording == True: 
+        return
+    recording = True
+    camera.start_recording('video.h264')
+    time.sleep(5)
+    camera.stop_recording()
+    name = "video_%s.mp4" % datetime.datetime.now() 
+    name = name.replace(" ", "_")
+    syscall = 'MP4Box -add video.h264 \"' + name + '\"'
+    os.system(syscall)
+    f = open(name, 'rb')
+    db.files_upload(f.read(), '/' + name)
+    f.close()
+    os.remove(name)
+    recording = False
+
+atexit.register(exit_handler)
+
+db = dropbox.Dropbox('my dropbox credentials')
+recording = False 
+camera = PiCamera()
+camera.start_preview()
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(11, GPIO.OUT)
+
+MAGNET_GPIO = 18
+GPIO.setup(MAGNET_GPIO, GPIO.IN)
+GPIO.add_event_detect(MAGNET_GPIO, GPIO.FALLING, callback=magnet_callback)
+#+END_SRC 
+
+*Erklärung*: wenn sich der Magnetschalter öffnet, triggert das die Funktion =magnet_callback=. Hier wird die Aufnahme der Kamera gestartet (5 Sekunden) und an meinen Dropbox-Ordner verschickt
+
+
+Weitere interessante Python-Libraries:
+
+- [[https://keras.io/][keras]] (Deep Learning)
+- [[https://scikit-learn.org/stable/][scikit-learn]] (Machine Learning)
+- [[https://pig.apache.org/][Apache Pig]] (Big Data)
+- [[http://numpy.scipy.org/][numpy]] (Advanced Mathematics)
+- [[https://www.pygame.org/][pygame]] (Games, für B-Aufgabe!) 
+
+
+und viele weitere mehr ... 
+
+Python ist
+
+- eine interpretierte Skriptsprache
+- eine Sprache mit "dynamischer Typisierung" (Vor- und Nachteile!) 
+
+** Installation (plus "pygame") 
+
+Auf Linux: 
+
+#+BEGIN_SRC none 
+sudo apt install python3 python3-pip
+#+END_SRC
+
+Auf dem Mac (ggf. fehlt noch was; ich glaube, ich habe vorher brew installiert? Siehe auch [[https://docs.python-guide.org/starting/install3/osx/][python-guide]]): 
+
+#+BEGIN_SRC none
+pip install --upgrade 
+#+END_SRC
+
+Aufruf der Python-REPL über =python3= 
+
+Auf Windows: 
+
+- Installer herunterladen, beim Ausführen *unbedingt* Haken bei /Add Python 3.7 to PATH/ setzen
+- unter https://www.python.org sollten Sie aber die benötigten Informationen finden!
+
+[[https://pypi.org/project/pip/][pip]] ist der "Paketmanager" für Python-Module 
+
+
+*Hinweis*:                
+                                                                                  
+ Python existiert in zwei "Varianten" python und python3, die untereinander nicht ganz kompatibel sind \sad. 
+ Wir verwenden *python3* ! 
+
+** Python-Grundlagen 
+
+ - Variablen
+ - Schleifen
+ - Fallunterscheidungen
+ - Funktionen 
+ - Listen
+ 
+
+*** Variablen
+
+ Variablen müssen in Python nicht deklariert werden:
+
+ #+BEGIN_SRC python :results output :exports both
+ x = 13
+ print(x)
+ x + 5 
+ print(type(x))   # <type 'int'>
+ x = "Hallo"
+ print(x)
+ print(type(x)) # <type 'str'>
+ x = 12;
+ print("x hat den Wert " + str(x))
+ #+END_SRC
+
+ #+RESULTS:
+ : 13
+ : <type 'int'>
+ : Hallo
+ : <type 'str'>
+ : x hat den Wert 12
+
+ In C/C#/Java etc. anders! 
+
+*** Schleifen
+
+Mit "range": 
+
+#+BEGIN_SRC python :results output :exports both
+for i in range(1,6): 
+  print(str(i))
+#+END_SRC
+
+#+RESULTS:
+: 1
+: 2
+: 3
+: 4
+: 5
+
+Auf Einrückungen achten! 
+
+*Beachte*: =range(...)= lässt den letzten Wert aus! 
+- gewöhnungsbedürftig, ergibt aber Sinn im Umgang mit Arrays (sehen wir gleich)
+
+Fakultät:
+
+#+BEGIN_SRC python :results output :exports both
+n = 10
+ergebnis = 1
+for i in range(1,n+1): 
+  ergebnis = ergebnis * i
+
+print(str(ergebnis))
+#+END_SRC
+
+#+RESULTS:
+: 3628800
+
+*** Fallunterscheidungen
+
+#+begin_src python 
+x = 5
+if x < 4:
+  print(str(x) + " ist kleiner als vier")
+elif x < 10:
+  print(str(x) + " ist größer als vier, aber kleiner als zehn")
+else:
+  print(str(x) + " ist größer oder gleich 10")
+#+end_src
+
+#+RESULTS:
+
+*** Funktionen
+
+Schlüsselwort =def= leitet Funktion ein; Funktionen haben (i. d. R.) Parameter, die in runden Klammern angegeben werden: 
+
+#+BEGIN_SRC python :results output :exports both
+def say_hello(vorname, nachname):
+  print("Hallo " + vorname + " " + nachname + "!")
+
+say_hello("Richard","Stallman")
+# Variante: "named parameter":
+say_hello(nachname="Torvalds", vorname="Linus")
+#+END_SRC
+
+#+RESULTS:
+: Hallo Richard Stallman!
+: Hallo Linus Torvalds!
+
+Auf Einrückungen achten!
+
+"named parameter" gibt es so in C/C#/Java nicht! 
+
+*Beachte*: 
+- Funktions-*Deklaration* mit =def=: =def say_hello(...)= 
+- Funktions-*Aufruf* ohne =def=: =say_hello("Richard", "Stallman")=
+  - Funktionsaufrufe müssen Parameter "bedienen" 
+
+Eine Funktion wird nur *einmal* deklariert, kann aber *beliebig oft* aufgerufen werden! 
+
+Konvention zur Namensgebung von Funktionen in Python: Wort-Bestandteile werden durch Unterstriche getrennt: =say_hello=; in C# ist dagegen "CamelCase" die Konvention: =SayHello= 
+
+Funktion mit Rückgabe (Schlüsselwort =return=):
+
+#+BEGIN_SRC python :results output :exports both
+def square(x):
+  return x*x
+
+print(square(3))
+print(square(1001))
+#+END_SRC
+
+#+RESULTS:
+: 9
+: 1002001
+
+
+Fakultät:
+
+#+BEGIN_SRC python :results output :exports both
+def fakultaet(n):
+  ergebnis = 1
+  for i in range(1,n+1):
+    ergebnis = ergebnis * i
+  return ergebnis
+
+print(fakultaet(10))
+print(fakultaet(99))
+#+END_SRC
+
+#+RESULTS:
+: 362880
+: 9426890448883247745626185743057242473809693764078951663494238777294707070023223798882976159207729119823605850588608460429412647567360000000000000000000000
+
+*Unterschied zu C/C#/Java*: Python geht "automatisch" mit großen Zahlen korrekt um! 
+
+Kompromiss bei C-artigen Sprachen, die meist nach dem Prinzip "make the common case fast" agieren:
+- z. B. =int=-Datentyp (üblicherw. 32 Bit) in C/C#/Java für "schnelle" und "hardwarenahe" Berechnungen, aber mit Einschränkungen in Bezug auf Größe! 
+
+Fakultät rekursiv:
+
+#+BEGIN_SRC python :results output :exports both
+def fakultaet(n):
+  if n == 0: return 1
+  else: return n * fakultaet(n-1)
+
+print(fakultaet(10))
+print(fakultaet(99))
+#+END_SRC
+
+#+RESULTS:
+: 3628800
+: 933262154439441526816992388562667004907159682643816214685929638952175999932299156089414639761565182862536979208272237582511852109168640000000000000000000000
+
+*Beachte*: in Python scheint es doch ein recht niedriges Rekursionslimit (ca. 100 Rekursionen) zu geben. Andere Sprachen wie /Erlang/ oder /Haskell/ können das besser! 
+
+*** Listen 
+
+"Ähnlich" wie Arrays in Java, C#, C etc., aber 
+- dynamisch
+- können Werte unterschiedlichen Typs aufnehmen 
+
+Python kennt auch Arrays, siehe bspw.  https://www.programiz.com/python-programming/array
+
+#+BEGIN_SRC python :exports both :results output
+names = ["Joseph Weizenbaum", "Marvin Minsky", "Steve Russel", "Richard Stallman", "Linus Torvalds"]
+
+print(len(names))
+print(names)
+print("erstes Element: " + names[0])
+
+for name in names: 
+  print name 
+
+names.append("Claude Shannon")
+print(len(names))
+print(names)
+
+numbers = [1,2,3,4,5]
+
+print(len(numbers))
+print(numbers)
+for num in numbers:
+  print(num)
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+5
+['Joseph Weizenbaum', 'Marvin Minsky', 'Steve Russel', 'Richard Stallman', 'Linus Torvalds']
+erstes Element: Joseph Weizenbaum
+Joseph Weizenbaum
+Marvin Minsky
+Steve Russel
+Richard Stallman
+Linus Torvalds
+6
+['Joseph Weizenbaum', 'Marvin Minsky', 'Steve Russel', 'Richard Stallman', 'Linus Torvalds', 'Claude Shannon']
+5
+[1, 2, 3, 4, 5]
+1
+2
+3
+4
+5
+#+end_example
+
+
+
+
+#+BEGIN_SRC python :results output :exports both 
+def square(x): 
+  return x*x
+
+numbers = range(1,6)
+print(numbers)
+# quadriere alle Zahlen in numbers: 
+squared =  [square(num) for num in numbers]
+print(squared)
+#+END_SRC
+
+#+RESULTS:
+: [1, 2, 3, 4, 5]
+: [1, 4, 9, 16, 25]
+
+Braucht man die Indizes, kann =enumerate= oder =range= verwendet werden:
+
+#+BEGIN_SRC python :results output :exports both 
+numbers = range(10,1,-1) 
+print(numbers)
+
+for i, num in enumerate(numbers):
+  print(str(i) + ": " + str(num))
+
+print("")
+# alternativ: 
+for i in range(0, len(numbers)): 
+  print(str(i) + ": " + str(numbers[i]))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[10, 9, 8, 7, 6, 5, 4, 3, 2]
+0: 10
+1: 9
+2: 8
+3: 7
+4: 6
+5: 5
+6: 4
+7: 3
+8: 2
+
+0: 10
+1: 9
+2: 8
+3: 7
+4: 6
+5: 5
+6: 4
+7: 3
+8: 2
+#+end_example
+
+*Strings sind Listen* 
+
+#+begin_src python
+s = "Justin Bieber"
+s[0] # 'J'
+s[-1] # 'r' 
+#+end_src
+
+
+*Generatoren*
+
+
+#+BEGIN_SRC python :results output :exports both 
+def square(x): 
+  return x*x
+
+def even(x):
+  if x % 2 == 0: return True
+  else: return False
+
+squares = [square(x) for x in range(1,10)]
+evensquares = [square(x) for x in range(1,10) if even(x)]
+
+print(squares)
+print(evensquares)
+
+#+END_SRC
+
+#+RESULTS:
+: [1, 4, 9, 16, 25, 36, 49, 64, 81]
+: [4, 16, 36, 64]
+
+
+
+
+** Mini-Übungen 
+
+- ggf. Google zur Hilfe nehmen
+
+a) Liste aller Dreierpotenzen der Zahlen von 1 bis 1000, die durch 5 teilbar sind in absteigender Reihenfolge 
+
+b) Liste von 100 zufälligen Zahlen erzeugen und die größte ermitteln
+
+Tipp: verwenden Sie die Python-Bibliothek "random". 
+
+c) Liste von 100 zufälligen Zahlen erzeugen und Mittelwert bestimmen 
+
+d) Funktion =sechs_aus_neunundvierzig=, die eine Lottoziehung durchführt. 
+
+Beispiel:
+#+begin_example
+>>> sechs_aus_neunundvierzig()
+[1, 47, 34, 11, 40, 46]
+#+end_example
+
+e) Funktion =reverse=, die einen String umdreht. Beispiel:
+
+#+begin_example
+>>> s = reverse("Justin Bieber")
+>>> print(s) # rebeiB nitsuJ
+#+end_example
+
+f) Test auf Palindrom (Wort vorwärts wie rückwärts gleich)
+
+Beispiel:
+#+begin_example
+>>> ist_palindrom("regalxager")
+False
+>>> ist_palindrom("regallager")
+True
+#+end_example
+
+Tipp: iterieren Sie über die "halbe Länge" (nach unten abgerundet) des String; vergleichen Sie dann den Buchstaben an Index "i" mit Index -(i+1). 
+
+g) Funktion =fibs(n)=, die eine Liste der $n$ Fibonacci-Zahlen zurückliefert. 
+
+(die i.te Fibonacci-Zahl ist definiert als die Summe der beiden Vorgänger in der Liste; die 1. und 2. Fibonacci-Zahl ist jeweils 1) 
+
+Beispiel:
+#+begin_example
+>>> fibs(10)
+[1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+#+end_example
+
+*** COMMENT Lösungen
+
+a) 
+
+#+begin_src python 
+[x*x*x for x in range(1000,0,-1) if x*x*x % 5 == 0]
+#+end_src
+
+#+RESULTS:
+None
+
+b)
+
+#+begin_src python
+import random
+randInts = [random.randint(100) for x in range(100)]
+max(randInts)
+#+end_src
+
+c) wie b), dann:
+
+#+begin_src python
+summe = 0
+for x in randInts:
+  summe += x
+summe/len(randInts) 
+#+end_src
+
+d) Einfach mit Funktion "random.choices":
+
+#+begin_src python
+import random 
+
+def sechs_aus_neunundvierzig():
+  return random.choices(range(1,50), k=6)
+
+sechs_aus_neunundvierzig()
+#+end_src
+
+
+Komplizierter "zu Fuß": 
+
+#+begin_src python
+import random 
+
+def sechs_aus_neunundvierzig():
+  values = [x for x in range(1,50)]
+  result = [] 
+  for value in values:
+    result.append(value)
+    values.remove(value)
+  return result
+
+sechs_aus_neunundvierzig()
+
+#+end_src
+
+#+RESULTS:
+: None
+
+e) 
+
+Schönste Lösung: 
+
+#+begin_src python
+def reverse_string(s):
+  return s[::-1]
+#+end_src
+
+"zu Fuß": 
+
+#+begin_src python
+def reverse(s):
+  result = ""
+  for c in s:
+    result = c + result
+  return result
+#+end_src
+
+f) 
+
+#+begin_src python
+def ist_palindrom(s): 
+  for c in range(int(len(s)/2)):
+    if s[c] != s[-(c+1)]:
+      return False
+  return True
+
+ist_palindrom("regallager") # True
+ist_palindrom("regaxlager") # False 
+#+end_src
+
+
+g)
+
+#+begin_src python
+def next_fib(a,b): 
+  return a+b
+
+def fibs(n): 
+  if (n == 1): return [1]
+  if (n == 2): return [1,1]
+  result = [1,1]
+  for i in range(n-2):
+    result.append(next_fib(result[-2], result[-1]))
+  return result
+#+end_src
+
+
+Ein paar der Aufgaben in C# gelöst: 
+#+begin_src csharp
+using System; 
+
+class Test {
+  static int square(int x) {
+    return x*x;
+  }
+
+  static int[] RandomNumbers(int howmany) {
+    Random random = new Random(); 
+    int[] result = new int[howmany];
+    for (int i = 0; i < howmany; i++)
+      result[i] = random.Next(); 
+    return result;
+  }
+
+  static int Maximum(int[] values) {
+    int max = Int32.MaxValue;
+    foreach (int value in values) {
+      if (value > max) max = value;
+    }
+    return max; 
+  }
+
+  static double Mittelwert(int[] values) {
+    int sum = 0;
+    foreach(var value in values) sum += value;
+    return sum/values.Length; 
+  }
+
+  public static void Main() {
+    System.Console.WriteLine(square(13));
+    Console.WriteLine(Maximum(RandomNumbers(100)));
+  }
+}
+#+end_src
+
+#+RESULTS:
+|        169 |
+| 2147483647 |
+
+
+
+** Ein komplexeres Beispiel: Conway's [[https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens][Game of Life]]
+
+[[file:img/video.gif]]
+
+siehe vlt. auch (aber *nur bei Interesse*!)  aktuellen CCC-Vortrag [[https://media.ccc.de/v/35c3-9451-simulating_universes][Simulating Universes]]
+
+*Disclaimer*: das folgende Beispiel soll zur /Inspiration/ dienen, nicht zur Abschreckung!
+- niemand verlangt von Ihnen, dass Sie das jetzt sofort reproduzieren können! 
+
+#+BEGIN_SRC python :tangle python/gol.py 
+#+END_SRC
+
+
+#+RESULTS:
+
+
+- größere Aufgabe in kleinere Teilaufgaben aufteilen
+- möglichst wenig Abhängigkeiten der Teillösungen voneinander
+  - so dass möglichst viele der Teillösungen unabhängig von anderen Teilen testbar werden
+- Abstraktion durch geeignete Funktionen
+- Funktionen erfüllen /eine/ definierte Aufgabe
+  - Gefahr des Verzettelns sinkt! 
+- einfacher ist oft besser
+
+
+*** COMMENT Lösung
+
+ #+BEGIN_SRC python :tangle golkomplett.py 
+ DEAD = ' '
+ ALIVE = '#'
+
+ def make_glider(width, height):
+     field = [[DEAD for x in range(width)] for y in range(height)]
+     field[0][1] = ALIVE
+     field[1][2] = ALIVE
+     field[2][0] = field[2][1] = field[2][2] = ALIVE 
+     return field
+
+ def make_glider_gun(width, height):
+     assert width == 40, "Feld muss genau 40 Zeichen breit sein"
+     assert height >= 10, "Feld muss mindestens 10 Zeichen hoch sein" 
+    
+     field = [[DEAD for x in range(width)] for y in range(height)]
+     field[1] = "                         #              "
+     field[2] = "                       # #              "
+     field[3] = "             ##      ##            ##   "
+     field[4] = "            #   #    ##            ##   "
+     field[5] = " ##        #     #   ##                 "
+     field[6] = " ##        #   # ##    # #              "
+     field[7] = "           #     #       #              "
+     field[8] = "            #   #                       "
+     field[9] = "             ##                         "
+
+     return field 
+
+ import os 
+
+ def clear():
+     os.system('clear' if os.name == 'posix' else 'cls')
+    
+ def draw(field):
+   clear() 
+   for row in field:
+       for col in row:
+           print(col, end='')
+       print()
+
+ def get_value(field, row, col):
+     if (row >= 0 and row < len(field) and col >= 0 and col < len(field[0]) and field[row][col] == ALIVE):
+       return 1
+     else: 
+       return 0
+      
+ def apply_rules(field):
+     result = [[DEAD for x in range(len(field[0]))] for y in range(len(field))]
+     for rowindex, row in enumerate(field):
+         for colindex, col in enumerate(row):
+             neighbors = 0
+             neighbors += get_value(field, rowindex-1, colindex)
+             neighbors += get_value(field, rowindex+1, colindex)
+             neighbors += get_value(field, rowindex, colindex-1)
+             neighbors += get_value(field, rowindex, colindex+1)
+             neighbors += get_value(field, rowindex-1, colindex-1)
+             neighbors += get_value(field, rowindex+1, colindex-1)
+             neighbors += get_value(field, rowindex-1, colindex+1)
+             neighbors += get_value(field, rowindex+1, colindex+1)
+
+             if (neighbors == 3 or (col == ALIVE and neighbors == 2)):
+                 result[rowindex][colindex] = ALIVE
+     return result
+            
+
+ glider = make_glider(40,20)
+ glider_gun = make_glider_gun(40,20)
+ field = glider_gun
+
+ from time import sleep
+
+ while True:
+     draw(field)
+     field = apply_rules(field)
+     sleep(0.1)
+ #+END_SRC
+ 
+* Teilnehmer
+
+| Franziska Pieroth |
+| Ilka Lübben       |
+| Marius Jäger      |
+| Marius Schulze    |
+| Tobias Homburger  |
+| Stefan Kemper     |
+| Sinha Fürbeck     |
+| Dimitros Svarnas  |
+| Patrick Fischer   |
+| Boese             |
+|                   |
+
+
+
+* COMMENT Autoexecute
+
+#+BEGIN_SRC emacs-lisp
+(setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
+
+
+
